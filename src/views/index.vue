@@ -1,13 +1,37 @@
-<script setup lang="ts">
+<script lang="ts">
+import { ref, onMounted, defineComponent } from 'vue';
+import Food from '../controller/Food'
+import Game from '@/controller/Game.ts'
+export default defineComponent({
+  setup() {
+    const foodRef = ref(null)
+    
+    function resetFood() {
+      const food = new Food(foodRef.value);
+      food.setRandomPosition()
+    }
+    
+    const game = new Game();
+    game.start();
+    
+    onMounted(() => {
+      resetFood()
+    })
+    return {
+      foodRef,
+    }
+  }
+})
 </script>
 
 <template>
   <div class="home-page">
     <div class="wrapper">
       <div class="wrapper-header">
-        <div class="snake-body">
+        <div class="snake-body" ref="snakeBody">
           <div class="snake-body-item"></div>
         </div>
+        <div class="food" ref="foodRef"></div>
         <!-- <div class="reset">重新开始</div> -->
       </div>
       <div class="wrapper-footer">
@@ -33,15 +57,48 @@
     .wrapper{
       width: 500px;
       height: 750px;
-      border: 1px solid #000;
+      border: 10px solid rgb(7, 201, 223);
       border-radius: 8px;
       padding-top: 25px;
+      .snake-body{
+        display: flex;
+        position: absolute;
+        top: 0;
+        left:0;
+      }
       .wrapper-header{
         width: 440px;
         height: 440px;
         margin: 0 auto;
-        border: 1px solid #000;
-        border-radius: 8px;
+        border: 1px solid rgb(7, 201, 223);
+        position: relative;
+        .snake-body-item{
+          width: 20px;
+          height: 20px;
+          border: 1px solid #fff;
+          background: #000;
+        }
+        .food{
+          width: 20px;
+          height: 20px;
+          background: #f00;
+          position: absolute;
+          top: 100px;
+          left: 100px;
+          animation: blink 1s linear infinite;
+        }
+
+        @keyframes blink {
+          0%{
+            opacity: 1;
+          }
+          50%{
+            opacity: 0;
+          }
+          100%{
+            opacity: 1;
+          }
+        }
       }
       .wrapper-footer{
         display: flex;
