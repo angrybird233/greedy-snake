@@ -11,22 +11,37 @@ enum Direction {
 }
 
 class Snake {
+  headPos: Point;
   bodyPos: Point[];
   direction: string;
-  constructor(bodyPos: Point[], direction: string) {
-    this.bodyPos = bodyPos
-    this.direction = direction;
+  constructor() {
+    this.headPos = {x: 0, y: 0}
+    this.bodyPos = []
+    this.direction = 'Right' 
   }
-  
   // move snake
   move() {
-    
-  }
-
-  grow() {
-
+    const prevHeadPos = {...this.headPos}
+    const cellSize = 20;
+    if(this.direction === 'Right'){
+      this.headPos.x += cellSize;
+    }
+    if(this.direction === 'Left'){
+      this.headPos.x -= cellSize;
+    }
+    if(this.direction === 'Up'){
+      this.headPos.y -= cellSize;
+    }
+    if(this.direction === 'Down'){
+      this.headPos.y += cellSize;
+    }
+    // add new head to body
+    this.bodyPos.push(prevHeadPos)
+    this.bodyPos.shift()
   }
 
   checkIsOverSide() {}
 
 }
+
+export default Snake;

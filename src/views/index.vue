@@ -1,11 +1,12 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent } from 'vue';
 import Food from '../controller/Food'
-import Game from '@/controller/Game.ts'
+import Snake from '../controller/Snake'
+import Game from '../controller/Game'
 export default defineComponent({
   setup() {
     const foodRef = ref(null)
-    
+    const snakeBody = ref(null)
     function resetFood() {
       const food = new Food(foodRef.value);
       food.setRandomPosition()
@@ -14,6 +15,13 @@ export default defineComponent({
     const game = new Game();
     game.start();
     
+    const snake = new Snake();
+    setInterval(() => {
+      snake.move();
+      console.log(snake.headPos);
+
+    },500)
+
     onMounted(() => {
       resetFood()
     })
