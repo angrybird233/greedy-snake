@@ -1,32 +1,35 @@
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue';
-import Food from '../controller/Food'
-import Snake from '../controller/Snake'
-import Game from '../controller/Game'
+// import { ref, reactive, onMounted, defineComponent } from 'vue';
+// import Food from '../controller/Food'
+// import Snake from '../controller/Snake'
+// import Game from '../controller/Game'
 export default defineComponent({
   setup() {
-    const foodRef = ref(null)
-    const snakeBody = ref(null)
-    function resetFood() {
-      const food = new Food(foodRef.value);
-      food.setRandomPosition()
-    }
-    
-    const game = new Game();
-    game.start();
-    
-    const snake = new Snake();
-    setInterval(() => {
-      snake.move();
-      console.log(snake.headPos);
+    // const foodRef = ref(null)
+    // const snakeRef = ref(null)
+    // const snakePostions = reactive([])
 
-    },500)
+    // function resetFood() {
+    //   const food = new Food(foodRef.value);
+    //   food.setRandomPosition()
+    // }
+    
+    // const game = new Game();
+    // game.start();
+    
+    // const snake = new Snake(snakeRef);
+    // setInterval(() => {
+    //   snake.move();
+    //   console.log(snake.headPos);
 
-    onMounted(() => {
-      resetFood()
-    })
+    // },800)
+
+    // onMounted(() => {
+    //   resetFood()
+    // })
     return {
-      foodRef,
+      // foodRef,
+      // snakePostions
     }
   }
 })
@@ -36,8 +39,8 @@ export default defineComponent({
   <div class="home-page">
     <div class="wrapper">
       <div class="wrapper-header">
-        <div class="snake-body" ref="snakeBody">
-          <div class="snake-body-item"></div>
+        <div class="snake-body" ref="snakeRef">
+          <div class="snake-body-item" v-for="(item,index) in snakePostions" :key="index"></div>
         </div>
         <div class="food" ref="foodRef"></div>
         <!-- <div class="reset">重新开始</div> -->
