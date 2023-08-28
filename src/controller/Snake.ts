@@ -5,8 +5,8 @@ class Snake {
   bodies: HTMLCollection;
   constructor(element: HTMLElement, ) {
     this.element = element;
-    this.head = element.firstChild as HTMLElement;
-    this.bodies = element.childNodes as any;
+    this.head = document.querySelector('#snake-head') as HTMLElement;
+    this.bodies = document.querySelectorAll('#snake-body-item') as any;
   }
 
   get X() {
@@ -18,7 +18,7 @@ class Snake {
 
   set X(value) {
     if(!value) return;
-    if(value <0 || value > 440){
+    if(value <0 || value > 420){
       throw new Error('蛇撞墙了');
     }
     this.head.style.left = value + 'px';
@@ -28,7 +28,7 @@ class Snake {
 
   set Y(value) {
     if(!value) return;
-    if(value <0 || value > 440){
+    if(value <0 || value > 420){
       throw new Error('蛇撞墙了');
     }
     this.head.style.top = value + 'px';

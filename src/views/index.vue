@@ -1,35 +1,28 @@
 <script lang="ts">
-// import { ref, reactive, onMounted, defineComponent } from 'vue';
-// import Food from '../controller/Food'
-// import Snake from '../controller/Snake'
-// import Game from '../controller/Game'
+import { ref, onMounted, defineComponent } from 'vue';
+import Game from '../controller/Game'
 export default defineComponent({
   setup() {
-    // const foodRef = ref(null)
-    // const snakeRef = ref(null)
-    // const snakePostions = reactive([])
-
-    // function resetFood() {
-    //   const food = new Food(foodRef.value);
-    //   food.setRandomPosition()
-    // }
+    const foodRef = ref<HTMLDivElement | null>(null)
+    const snakeRef = ref<HTMLDivElement | null>(null)
+    const scoreRef = ref<HTMLDivElement | null>(null)
+    const levelRef = ref<HTMLDivElement | null>(null)
+    let game: Game | null = null;
+    onMounted(() => {
+      game = new Game(snakeRef,foodRef,scoreRef,levelRef);
+      game.init();
+    })
     
-    // const game = new Game();
-    // game.start();
-    
-    // const snake = new Snake(snakeRef);
-    // setInterval(() => {
-    //   snake.move();
-    //   console.log(snake.headPos);
+    const changeDirection =(direction:'string') => {
+      game.changeDirection(direction);
+    }
 
-    // },800)
-
-    // onMounted(() => {
-    //   resetFood()
-    // })
     return {
-      // foodRef,
-      // snakePostions
+      foodRef,
+      snakeRef,
+      scoreRef,
+      levelRef,
+      changeDirection
     }
   }
 })
@@ -40,20 +33,20 @@ export default defineComponent({
     <div class="wrapper">
       <div class="wrapper-header">
         <div class="snake-body" ref="snakeRef">
-          <div class="snake-body-item" v-for="(item,index) in snakePostions" :key="index"></div>
+          <div class="snake-body-item" id="snake-head"></div>
         </div>
         <div class="food" ref="foodRef"></div>
         <!-- <div class="reset">重新开始</div> -->
       </div>
       <div class="wrapper-footer">
-        <div class="score">分数：0 分</div>
-        <div class="game-level">难度等级：1 级</div>
+        <div class="score" ref='scoreRef'>分数：0 分</div>
+        <div class="game-level" ref="levelRef">难度等级：1 级</div>
       </div>
       <div class="action-buttons">
-        <button class="button-top">↑</button>
-        <button class="button-bottom">↓</button>
-        <button class="button-left">←</button>
-        <button class="button-right">→</button>
+        <button class="button-top" @click="changeDirection('Up')">↑</button>
+        <button class="button-bottom" @click="changeDirection('Down')">↓</button>
+        <button class="button-left" @click="changeDirection('Left')">←</button>
+        <button class="button-right" @click="changeDirection('Right')">→</button>
       </div>
     </div>
   </div>
@@ -88,6 +81,7 @@ export default defineComponent({
           height: 20px;
           border: 1px solid #fff;
           background: #000;
+          position: absolute;
         }
         .food{
           width: 20px;

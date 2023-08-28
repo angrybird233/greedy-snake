@@ -1,6 +1,6 @@
 class Food {
-  private x: number;
-  private y: number;
+  x: number;
+  y: number;
   element: HTMLElement;
   constructor(element: HTMLElement) {
     this.x = 0;
@@ -8,7 +8,7 @@ class Food {
     this.element = element;
   }
 
-  setRandomPosition(){
+  createFood(){
     this.x = Math.floor(Math.random()*400);
     this.y = Math.floor(Math.random()*400);
     this.element.style.left = this.x + 'px';

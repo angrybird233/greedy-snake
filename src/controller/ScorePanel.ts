@@ -15,9 +15,9 @@ class ScorePanel {
   }
 
 
-  increaseScore(score: number): void {
-    this.score += score;
-    this.scoreElement.innerText = this.score.toString();
+  addScore(): void {
+    this.score ++;
+    this.scoreElement.innerText = '分数：'+this.score.toString()+'分';
     if(this.score % this.levelStep === 0){
       this.levelUp();
     }
@@ -25,7 +25,7 @@ class ScorePanel {
 
   levelUp() : void {
     if(this.level < this.maxLevel){
-      this.levelElement.innerText = this.level.toString()
+      this.levelElement.innerText = "等级："+this.level.toString()+' 级'
     }
   }
 }
