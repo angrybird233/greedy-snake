@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref,Ref, onMounted, defineComponent } from 'vue';
+import { ref, onMounted, defineComponent } from 'vue';
 import Game from '../controller/Game'
 export default defineComponent({
   setup() {
@@ -13,7 +13,7 @@ export default defineComponent({
       game.init();
     })
     
-    const changeDirection =(direction:'string') => {
+    const changeDirection =(direction: string) => {
       game.changeDirection(direction);
     }
 
