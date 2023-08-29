@@ -11,7 +11,7 @@ class ScorePanel {
     this.levelStep = 20;
     this.maxLevel = 5;
     this.levelElement = levelElement
-    this.levelElement = scoreElement
+    this.scoreElement = scoreElement
   }
 
 

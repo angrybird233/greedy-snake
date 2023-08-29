@@ -30,25 +30,25 @@ class Game {
   }
 
   keydownHanlder(event:KeyboardEvent) {
-    console.log(event);
     if(this.direction === event.key) return;
-    this.direction = event.key;
-    // switch (event.key) {
-      // case 'Up':
-      //   case 'ArrowUp':
-      //   case 'Down':
-      //   case 'ArrowDown':
-      //     if(this.YDirectionEvent.includes(this.direction)) return;
-      //     this.direction = event.key;
-      //     break;
-      //   case 'Left':
-      //   case 'ArrowLeft':
-      //   case 'Right':
-      //   case 'ArrowRight':
-      //     if(this.XDirectionEvent.includes(this.direction)) return;
-      //     this.direction = event.key;
-      //     break;
-    // }
+    switch (event.key) {
+      case 'Up':
+      case 'ArrowUp':
+        this.direction = 'up';
+        break;
+      case 'Down':
+      case 'ArrowDown':
+        this.direction = 'down';
+        break;
+      case 'Left':
+      case 'ArrowLeft':
+        this.direction = 'left';
+        break;
+      case 'Right':
+      case 'ArrowRight':
+          this.direction = 'right';
+          break;
+    }
   }
 
   run() {
@@ -84,7 +84,9 @@ class Game {
   
 
   checkIsEatFood(X: number, Y: number) {
-    if(X === this.food.x && Y === this.food.y) {
+    console.log(X === this.food.X);
+    console.log(Y === this.food.Y);
+    if(X === this.food.X && Y === this.food.Y) {
       this.food.createFood();
       this.snake.addBody()
       this.scorePanel.addScore();

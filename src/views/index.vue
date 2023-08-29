@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue';
+import { ref,Ref, onMounted, defineComponent } from 'vue';
 import Game from '../controller/Game'
 export default defineComponent({
   setup() {
@@ -9,7 +9,7 @@ export default defineComponent({
     const levelRef = ref<HTMLDivElement | null>(null)
     let game: Game | null = null;
     onMounted(() => {
-      game = new Game(snakeRef,foodRef,scoreRef,levelRef);
+      game = new Game(snakeRef.value,foodRef.value,scoreRef.value,levelRef.value);
       game.init();
     })
     
@@ -86,6 +86,7 @@ export default defineComponent({
         .food{
           width: 20px;
           height: 20px;
+          border: 1px solid transparent;
           background: #f00;
           position: absolute;
           top: 100px;

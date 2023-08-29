@@ -6,7 +6,7 @@ class Snake {
   constructor(element: HTMLElement, ) {
     this.element = element;
     this.head = document.querySelector('#snake-head') as HTMLElement;
-    this.bodies = document.querySelectorAll('#snake-body-item') as any;
+    this.bodies = document.querySelectorAll('#snake-body-item') as unknown as HTMLCollection;
   }
 
   get X() {
@@ -40,15 +40,15 @@ class Snake {
    for (let index = 0; index < this.bodies.length; index++) {
     const X = (this.bodies[index - 1] as HTMLElement).offsetLeft;
     const Y = (this.bodies[index - 1] as HTMLElement).offsetTop;
-    
     (this.bodies[index] as HTMLElement).style.left = X + 'px';
     (this.bodies[index] as HTMLElement).style.top = Y + 'px';
    }
   }
 
   addBody() {
-    // this.element.insertAdjacentElement('beforeend', "<div class='snake-body-item'></div>")
-    this.element.insertAdjacentElement('beforeend', "<div class='snake-body-item'></div>" as any)
+    const div = document.createElement('div');
+    div.className = 'snake-body-item';
+    this.element.insertAdjacentElement('beforeend', div)
   }
 
   //检查头是否碰到身体
